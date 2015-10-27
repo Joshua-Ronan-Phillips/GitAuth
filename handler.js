@@ -10,20 +10,25 @@ function handler(request, response) {
   }
   else if(url === "/auth") {
     getBody(request, function (passwordBody) {
-      console.log(JSON.parse(passwordBody));
+      // console.log(JSON.parse(passwordBody));
       var auth = "Basic " +
         new Buffer(passwordBody.username + ":" + passwordBody.password)
         .toString("base64");
       makeRequest.get({
-        url: "https://api.github.com/user",
+        url: "https://api.github.com/users/",
         headers: {
-          "Authorization": auth
+          "Authorization": auth,
+          "User-Agent": "Joshua-Ronan-Phillips"
         }
       }, function (error, response, body) {
         console.log("after auth bod-ay", body);
       });
     });
   }
+}
+
+function gitHubRequest(username, password, callback) {
+
 }
 
 function getBody(request,callback) {
